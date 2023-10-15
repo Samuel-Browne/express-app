@@ -53,10 +53,11 @@ app.get("/api/nintendoDsGames", async (req, res) => {
   }
 });
 
-app.get("/api/game", async (req, res) => {
+app.post("/api/game", async (req, res) => {
   try {
     // Make a GET request to the Giant Bomb API
-    const guid = req.body.value;
+    const guid = req.body.guid;
+    console.log(req.body);
     const response = await axios.get("https://www.giantbomb.com/api/game/" + guid, {
       params: {
         api_key: GIANT_BOMB_API_KEY,
