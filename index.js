@@ -32,7 +32,8 @@ app.get("/api/games", async (req, res) => {
   }
 });
 
-app.get("/api/nintendoDsGames", async (req, res) => {
+app.post("/api/nintendoDsGames", async (req, res) => {
+  const pageNumber = req.body.pageNumber;
   try {
     // Make a GET request to the Giant Bomb API
     const response = await axios.get("https://www.giantbomb.com/api/games/", {
@@ -40,6 +41,7 @@ app.get("/api/nintendoDsGames", async (req, res) => {
         api_key: GIANT_BOMB_API_KEY,
         format: "json",
         platforms: "52",
+        offset: pageNumber * 100,
         // Add more parameters as needed
       },
     });
